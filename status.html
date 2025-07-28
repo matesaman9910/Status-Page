@@ -2,30 +2,40 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Status Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Live System Status</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
   <style>
-    body { background-color: #0f172a; color: white; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: radial-gradient(circle at center, #0f172a, #020617);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: white;
+    }
   </style>
 </head>
-<body class="flex items-center justify-center min-h-screen">
+<body class="flex items-center justify-center h-full">
 
-  <div class="bg-slate-800 p-6 rounded-xl shadow-xl w-full max-w-md text-center">
-    <h1 class="text-2xl font-bold mb-4">🔒 Secure Status Page</h1>
-    <div id="statusDisplay" class="text-lg p-4 bg-slate-700 rounded-md mb-4">Loading...</div>
+  <div class="bg-slate-800 bg-opacity-90 p-8 rounded-2xl shadow-2xl w-full max-w-3xl mx-4">
+    <h1 class="text-4xl font-bold mb-6 text-center text-cyan-400">🔒 System Status Dashboard</h1>
 
-    <div id="authArea">
-      <button onclick="loginWithGoogle()" class="bg-blue-500 hover:bg-blue-600 p-2 rounded-md w-full">Login with Google</button>
+    <div id="statusDisplay" class="text-xl text-center p-4 bg-slate-700 rounded-md mb-6 border border-slate-600 shadow-inner">Loading current status...</div>
+
+    <div id="authArea" class="text-center">
+      <button onclick="loginWithGoogle()" class="bg-cyan-600 hover:bg-cyan-700 text-white font-semibold py-2 px-6 rounded-lg transition duration-200">Login with Google</button>
     </div>
 
     <div id="editArea" class="hidden">
-      <textarea id="statusInput" rows="3" class="w-full p-2 text-black rounded-md mb-2" placeholder="Update status..."></textarea>
-      <button onclick="updateStatus()" class="bg-green-500 hover:bg-green-600 p-2 w-full rounded-md">Update</button>
-      <button onclick="logout()" class="bg-red-500 hover:bg-red-600 p-2 w-full rounded-md mt-2">Logout</button>
+      <textarea id="statusInput" rows="4" class="w-full p-3 text-black rounded-md mb-4 border border-slate-300 focus:outline-none focus:ring-2 focus:ring-cyan-500" placeholder="Update system status..."></textarea>
+      <div class="flex gap-4">
+        <button onclick="updateStatus()" class="flex-1 bg-green-500 hover:bg-green-600 text-white py-2 rounded-lg font-medium">Update</button>
+        <button onclick="logout()" class="flex-1 bg-red-500 hover:bg-red-600 text-white py-2 rounded-lg font-medium">Logout</button>
+      </div>
     </div>
   </div>
 
