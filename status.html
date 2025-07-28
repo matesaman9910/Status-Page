@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Status Page</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+  <style>
+    body { background-color: #0f172a; color: white; }
+  </style>
+</head>
+<body class="flex items-center justify-center min-h-screen">
+
+  <div class="bg-slate-800 p-6 rounded-xl shadow-xl w-full max-w-md text-center">
+    <h1 class="text-2xl font-bold mb-4">🔒 Secure Status Page</h1>
+    <div id="statusDisplay" class="text-lg p-4 bg-slate-700 rounded-md mb-4">Loading...</div>
+
+    <div id="authArea">
+      <button onclick="loginWithGoogle()" class="bg-blue-500 hover:bg-blue-600 p-2 rounded-md w-full">Login with Google</button>
+    </div>
+
+    <div id="editArea" class="hidden">
+      <textarea id="statusInput" rows="3" class="w-full p-2 text-black rounded-md mb-2" placeholder="Update status..."></textarea>
+      <button onclick="updateStatus()" class="bg-green-500 hover:bg-green-600 p-2 w-full rounded-md">Update</button>
+      <button onclick="logout()" class="bg-red-500 hover:bg-red-600 p-2 w-full rounded-md mt-2">Logout</button>
+    </div>
+  </div>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyBqjL2V7GrLedUIa0cE0a-BnKhFzUBdS6g",
+      authDomain: "auth-firebase-d6cd8.firebaseapp.com",
+      projectId: "auth-firebase-d6cd8",
+      storageBucket: "auth-firebase-d6cd8.firebasestorage.app",
+      messagingSenderId: "776057568730",
+      appId: "1:776057568730:web:0c58efcee701925d7e94e3",
+      databaseURL: "https://auth-firebase-d6cd8-default-rtdb.europe-west1.firebasedatabase.app"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.database();
+    const statusRef = db.ref("/status");
+
+    const statusDisplay = document.getElementById('statusDisplay');
+    const statusInput = document.getElementById('statusInput');
+    const authArea = document.getElementById('authArea');
+    const editArea = document.getElementById('editArea');
+
+    function updateStatus() {
+      const newStatus = statusInput.value.trim();
+      if (newStatus) {
+        statusRef.set(newStatus);
+        alert('✅ Status updated!');
+      }
+    }
+
+    function loginWithGoogle() {
+      const provider = new firebase.auth.GoogleAuthProvider();
+      auth.signInWithPopup(provider)
+        .then(() => {
+          authArea.style.display = 'none';
+          editArea.style.display = 'block';
+        })
+        .catch((error) => {
+          alert('❌ Login failed: ' + error.message);
+        });
+    }
+
+    function logout() {
+      auth.signOut().then(() => {
+        authArea.style.display = 'block';
+        editArea.style.display = 'none';
+      });
+    }
+
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        authArea.style.display = 'none';
+        editArea.style.display = 'block';
+      } else {
+        authArea.style.display = 'block';
+        editArea.style.display = 'none';
+      }
+    });
+
+    statusRef.on("value", (snapshot) => {
+      const value = snapshot.val();
+      statusDisplay.textContent = value || "✅ All systems operational.";
+      if (editArea.style.display === 'block') {
+        statusInput.value = value;
+      }
+    });
+  </script>
+
+</body>
+</html>
