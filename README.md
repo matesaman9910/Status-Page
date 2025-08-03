@@ -28,3 +28,11 @@ Ideal for:
 - 🎨 Fully responsive modern UI (mobile + desktop)
 - 💾 No backend or hosting needed — deploy directly to GitHub Pages or Firebase Hosting
 - 📡 Public access: everyone can view status, but only logged-in users can edit it
+
+
+## Copyright
+© 2025 [matesaman9910] — All rights reserved.
+
+This project, including its source code, design, and assets, is the intellectual property of its creator. Unauthorized use, redistribution, or modification without explicit permission is strictly prohibited.
+
+For inquiries or permission requests, please contact the project owner at matejkratochvilbilina@gmail.com.
