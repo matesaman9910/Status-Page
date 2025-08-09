@@ -5,154 +5,101 @@
   <title>Status Page — Discontinued</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="This project has been discontinued. Thank you for being here." />
-
-  <!-- Social preview -->
   <meta property="og:title" content="Status Page — Discontinued" />
   <meta property="og:description" content="This project has been discontinued. Thank you for being here." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://vojtajanda.tech/matesaman9910/" />
 
   <style>
-    :root{
-      --bg: #0b1020;
-      --bg2: #0e1428;
-      --fg: #e8ecf2;
-      --muted: #a8b0c0;
-      --accent: #7aa2ff;
-      --card: #111831;
+    :root {
+      --bg: #0a0f1c;
+      --fg: #f5f6fa;
+      --muted: #a0a6b8;
+      --accent: #4a90ff;
+      --card: #11182d;
       --border: #1d2747;
-      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --shadow: 0 10px 30px rgba(0,0,0,0.4);
     }
-    @media (prefers-color-scheme: light){
-      :root{
-        --bg: #f6f8ff;
-        --bg2: #eef2ff;
-        --fg: #0d1220;
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f7f9ff;
+        --fg: #1a1d2b;
         --muted: #4a566e;
         --accent: #2b59ff;
         --card: #ffffff;
-        --border: #e6e9f5;
-        --shadow: 0 10px 30px rgba(30, 50, 150, .12);
+        --border: #e0e5f2;
+        --shadow: 0 10px 30px rgba(30, 50, 150, 0.12);
       }
     }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
-      color:var(--fg);
-      background:
-        radial-gradient(1200px 800px at 20% 0%, var(--bg2), transparent 70%),
-        radial-gradient(1200px 800px at 80% 100%, var(--bg2), transparent 70%),
-        var(--bg);
-      display:grid;
-      place-items:center;
-      padding:24px;
+    * { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; }
+    body {
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, sans-serif;
+      color: var(--fg);
+      background: radial-gradient(circle at 20% 0%, rgba(255,255,255,0.03), transparent 70%),
+                  radial-gradient(circle at 80% 100%, rgba(255,255,255,0.03), transparent 70%),
+                  var(--bg);
+      display: grid;
+      place-items: center;
+      padding: 24px;
     }
-    .wrap{
-      width:100%;
-      max-width:720px;
-      text-align:center;
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 40px 32px;
+      box-shadow: var(--shadow);
+      max-width: 600px;
+      text-align: center;
+      animation: fadeIn 0.6s ease-out;
     }
-    .card{
-      background:var(--card);
-      border:1px solid var(--border);
-      border-radius:20px;
-      padding:32px 28px;
-      box-shadow:var(--shadow);
+    h1 {
+      margin: 0 0 12px 0;
+      font-size: clamp(28px, 3vw, 38px);
     }
-    .badge{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      font-weight:600;
-      color:var(--muted);
-      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(0,0,0,.06));
-      border:1px solid var(--border);
-      border-radius:999px;
-      padding:8px 14px;
-      margin-bottom:14px;
-      letter-spacing:.2px;
+    p {
+      margin: 0 auto 20px auto;
+      color: var(--muted);
+      font-size: clamp(16px, 2vw, 18px);
+      line-height: 1.6;
+      max-width: 46ch;
     }
-    .icon{
-      width:18px;height:18px;display:inline-block
+    .btn {
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.15s ease, background 0.2s ease;
     }
-    h1{
-      margin:8px 0 10px 0;
-      font-size:clamp(26px, 3.2vw, 36px);
-      line-height:1.15;
-      letter-spacing:.2px;
+    .btn:hover {
+      transform: translateY(-2px);
+      background: color-mix(in srgb, var(--accent) 85%, white);
     }
-    p{
-      margin:0 auto 18px auto;
-      color:var(--muted);
-      font-size:clamp(15px, 1.8vw, 17px);
-      line-height:1.6;
-      max-width:52ch;
+    footer {
+      margin-top: 16px;
+      font-size: 12px;
+      color: var(--muted);
+      opacity: 0.85;
     }
-    .buttons{
-      display:flex;
-      flex-wrap:wrap;
-      gap:12px;
-      justify-content:center;
-      margin-top:8px;
-    }
-    .btn{
-      appearance:none;
-      border:1px solid var(--border);
-      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(0,0,0,.05));
-      color:var(--fg);
-      padding:12px 16px;
-      border-radius:12px;
-      text-decoration:none;
-      font-weight:600;
-      transition:transform .06s ease, border-color .2s ease, background .2s ease, opacity .2s ease;
-      will-change: transform;
-    }
-    .btn:hover{ transform: translateY(-1px); border-color: rgba(122,162,255,.55); }
-    .btn:active{ transform: translateY(0); }
-    .btn.primary{
-      background:linear-gradient(180deg, var(--accent), color-mix(in oklab, var(--accent) 70%, black));
-      color:white;
-      border-color:transparent;
-    }
-    footer{
-      margin-top:16px;
-      color:var(--muted);
-      font-size:12px;
-      opacity:.8;
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
-  <main class="wrap" role="main" aria-labelledby="title">
-    <div class="card" role="status" aria-live="polite">
-      <div class="badge" aria-hidden="true">
-        <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M12 3l9 18H3L12 3z" stroke="currentColor" stroke-width="1.6"/>
-          <path d="M12 9v5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-          <circle cx="12" cy="17" r="1.2" fill="currentColor"/>
-        </svg>
-        Status Page
-      </div>
-
-      <h1 id="title">This project has been discontinued</h1>
-      <p>Thanks so much for being here and supporting the project. The Status page is no longer maintained.</p>
-      <p>If you’re looking for what I’m working on now, check out my website below.</p>
-
-      <div class="buttons">
-        <a class="btn primary" href="https://vojtajanda.tech/matesaman9910/" rel="noopener">Visit my website</a>
-        <a class="btn" href="/" rel="noopener">Back to root</a>
-      </div>
-    </div>
-
-    <footer>
-      © <span id="y"></span> — Message last updated for deprecation notice.
-    </footer>
+  <main class="card" role="main" aria-labelledby="title">
+    <h1 id="title">This Project Has Been Discontinued</h1>
+    <p>Thank you for your support and for being part of this journey.  
+       The Status Page is no longer maintained.</p>
+    <p>You can still check out my latest work on my main website.</p>
+    <a class="btn" href="https://vojtajanda.tech/matesaman9910/" rel="noopener">Visit My Website</a>
+    <footer>© <span id="y"></span> matesaman9910</footer>
   </main>
-
   <script>
-    // year stamp
     document.getElementById('y').textContent = new Date().getFullYear();
   </script>
 </body>
